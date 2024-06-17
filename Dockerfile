@@ -5,7 +5,7 @@ FROM nginx:alpine
 RUN rm /etc/nginx/conf.d/default.conf
 
 # Копируем наш собственный конфигурационный файл nginx
-COPY config/nginx.conf /etc/nginx/conf.d/
+COPY nginx.conf /etc/nginx/conf.d/
 
 # Копируем статические файлы (HTML, CSS и т.д.)
 COPY html /usr/share/nginx/html
