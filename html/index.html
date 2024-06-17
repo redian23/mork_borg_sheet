@@ -10,7 +10,7 @@
 </head>
 <header>
     <img class="logo_img" src="logo.png">
-    <button>Очистить лист</button>
+    <button id="clear-button">Очистить лист</button>
 </header>
 <body style="opacity: 0.95">
     <div class="container">
@@ -33,7 +33,9 @@
 
             <div class="description">
                 <label>Силы</label>
+                <label>ХЛ+Д4 раз в день</label>
                 <textarea rows="4"></textarea>
+                <label>Хладнокровие РС12, или -д2 ОЗ и лишение сил на 1 час.</label>
             </div>
         </div>
     </div>
@@ -62,27 +64,35 @@
                 <input class="stats" type="text">
             </div>
             <div class="attribute">
-                <label>Присутствие</label>
+                <label>Холоднокровность</label>
                 <input class="stats" type="text">
             </div>
             <div class="attribute">
-                <label>Прочность</label>
+                <label>Стойкость</label>
                 <input class="stats" type="text">
             </div>
         </div>
 
         <div class="silver-omens">
-            <div class="omens">
-                <label>Знамения</label>
-                <input class="stats" type="text">
-            </div>
             <div class="silver">
                 <label>Серебро</label>
                 <input class="stats" type="text">
             </div>
+            <div class="omens">
+                <label>Знамения</label>
+                <input class="stats" type="text">
+            </div>
+            <label>Максимальный урон, Переброс, -д6 повреждений, РС -4, Анти-Крит/Провал</label>
         </div>
     </div>
     <div class="right-section">
+
+        <div id="image-container">
+            <label>Загрузить арт персонажа:</label>
+            <input type="file" id="upload-button" accept="image/*">
+            <img id="display-image" src="" alt="Загруженное изображение" style="display:none;">
+        </div>
+
         <div class="equipment">
             <div class="weapons">
                 <label>Оружие</label>
@@ -92,9 +102,13 @@
             <div class="armor">
                 <label>Броня</label>
                 <input type="text">
+                <input class="d2" type="checkbox" value="d2">-d2
+                <input class="d4" type="checkbox" value="d4">-d4
+                <input class="d6" type="checkbox" value="d6">-d6
             </div>
             <div class="equipment">
                 <label>Инвентарь</label>
+                <label>Сила +8 - Макс. нагрузка или РС+2 на испытания силы/ловкости</label>
                 <textarea rows="4"></textarea>
             </div>
             <label><strong>Страдания</strong></label>
@@ -110,5 +124,54 @@
         </div>
     </div>
 </div>
+    <script>
+        document.getElementById('upload-button').addEventListener('change', function(event) {
+            const file = event.target.files[0];
+            if (file) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    const img = document.getElementById('display-image');
+                    img.src = e.target.result;
+                    img.style.display = 'block';
+                };
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Функция для сохранения текста инпутов в localStorage
+        function saveInputsToLocalStorage() {
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            inputs.forEach((input, index) => {
+                localStorage.setItem(`input${index + 1}`, input.value);
+            });
+        }
+
+        // Функция для загрузки текста из localStorage в инпуты
+        function loadInputsFromLocalStorage() {
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            inputs.forEach((input, index) => {
+                const savedValue = localStorage.getItem(`input${index + 1}`);
+                if (savedValue !== null) {
+                    input.value = savedValue;
+                }
+            });
+        }
+
+        // Функция для очистки всех инпутов и localStorage
+        function clearInputs() {
+            const inputs = document.querySelectorAll('input[type="text"], textarea');
+            inputs.forEach((input, index) => {
+                input.value = '';
+                localStorage.removeItem(`input${index + 1}`);
+            });
+        }
+
+        // Установка слушателей событий
+        document.addEventListener('DOMContentLoaded', loadInputsFromLocalStorage);
+        document.querySelectorAll('input[type="text"], textarea').forEach(input => {
+            input.addEventListener('input', saveInputsToLocalStorage);
+        });
+        document.getElementById('clear-button').addEventListener('click', clearInputs);
+    </script>
 </body>
 </html>

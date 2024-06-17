@@ -75,7 +75,7 @@ body {
     padding: 5px;
 }
 
-.weapons input, .armor input{
+.weapons input {
     width: 100%;
     padding: 5px;
     margin-bottom: 5px;
@@ -84,13 +84,37 @@ body {
     border-radius: 3px;
 }
 
+.armor input {
+    padding: 5px;
+    margin-bottom: 5px;
+    max-width: calc(100% - 12px);
+    border: 1px solid #000;
+    border-radius: 3px;
+}
+
+.armor input.d2, .armor input.d4, .armor input.d6 {
+    padding: 5px;
+    margin-bottom: 5px;
+}
+
+
+.class textarea {
+    height: 100px;
+    width: calc(100% - 12px);
+    padding: 5px;
+    border: 1px solid #000;
+    border-radius: 3px;
+    min-width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
+}
 textarea {
     height: 200px;
     width: calc(100% - 12px);
     padding: 5px;
     border: 1px solid #000;
     border-radius: 3px;
-    max-width: calc(100% - 12px);;
+    min-width: calc(100% - 12px);
+    max-width: calc(100% - 12px);
 }
 
 .health-boxes {
@@ -108,8 +132,15 @@ textarea {
     margin-right: 10px;
 }
 
-.attributes .attribute, .silver-omens {
+.attributes .attribute {
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.silver-omens {
+    display: block;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 10px;
@@ -123,4 +154,16 @@ textarea {
 .inventory .row {
     height: 30px;
     margin-bottom: 5px;
+}
+
+#image-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+img {
+    max-height: 300px;
+    max-width: 400px;
+    width: auto;
 }
