@@ -6,10 +6,7 @@ services:
     container_name: mork_borg_online_sheet
     restart: unless-stopped
     ports:
-      - "8080:80"
-    networks:
-      network:
-        ipv4_address: 172.31.0.41
+      - "4141:4141"
     deploy:
       resources:
         limits:
@@ -20,5 +17,5 @@ networks:
     driver: bridge
     ipam:
       config:
-        - subnet: 172.31.0.0/16
-          gateway: 172.31.0.1
+        - subnet: 172.32.0.0/16
+          gateway: 172.32.0.1

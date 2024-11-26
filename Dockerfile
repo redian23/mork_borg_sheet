@@ -11,7 +11,7 @@ COPY nginx.conf /etc/nginx/conf.d/
 COPY html /usr/share/nginx/html
 
 # Экспонируем порт 80
-EXPOSE 80
+EXPOSE 4141
 
 # Запускаем nginx в foreground режиме
 CMD ["nginx", "-g", "daemon off;"]
