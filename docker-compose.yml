@@ -1,8 +1,8 @@
 version: '3.8'
 
 services:
-  charbox-prod:
-    build: ./
+  mork-borg:
+    image: redian23/mork-borg:latest
     container_name: mork_borg_online_sheet
     restart: unless-stopped
     ports:
